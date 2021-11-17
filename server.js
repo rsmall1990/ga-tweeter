@@ -41,5 +41,12 @@ app.get("/tweets", (req, res) => {
   });
 });
 
+// show route
+app.get("/tweets/:id", (req, res) => {
+    Tweet.findById(req.params.id, (err, foundTweet) => {
+        res.send(foundTweet);
+    });
+});
+
 // tell app to listen
 app.listen(port, () => console.log("Express is listening on port ", port));
