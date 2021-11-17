@@ -15,4 +15,4 @@ const app = express();
 // tell app to listen
 app.listen(PORT, () => {
     console.log(`Express is listening on port:${PORT}`);
-})
+});
