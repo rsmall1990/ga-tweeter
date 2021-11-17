@@ -28,9 +28,17 @@ app.use(express.urlencoded({ extended: false })); // this creates req.body
 
 // create route
 app.post("/tweets", (req, res) => {
-    Tweet.create(req.body, (err, tweet) => {
-        res.send(tweet);// these are a set of instructions that take place AFTER the tweet is created
-    }); // this code runs asychronously ... and accepts a callback function (which is just an anonymous function called as an argument in another function)
+  Tweet.create(req.body, (err, createdTweet) => {
+    //err is what gets called if there is an err and tweet is the tweet that was just created
+    res.send(createdTweet); // these are a set of instructions that take place AFTER the tweet is created
+  }); // this code runs asychronously ... and accepts a callback function (which is just an anonymous function called as an argument in another function)
+});
+
+// index route...if we wanted to see an index of our tweets...this is how we do that
+app.get("/tweets", (req, res) => {
+  Tweet.find({}, (err, arrayOfTweets) => {
+    res.send(arrayOfTweets);
+  });
 });
 
 // tell app to listen
