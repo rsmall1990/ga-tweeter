@@ -43,9 +43,28 @@ app.get("/tweets", (req, res) => {
 
 // show route
 app.get("/tweets/:id", (req, res) => {
-    Tweet.findById(req.params.id, (err, foundTweet) => {
-        res.send(foundTweet);
-    });
+  Tweet.findById(req.params.id, (err, foundTweet) => {
+    res.send(foundTweet);
+  });
+});
+
+// update route
+app.put("/tweets/:id", (req, res) => {
+  Tweet.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true },
+    (err, updatedTweet) => {
+      res.send(updatedTweet);
+    }
+  );
+});
+
+// Delete route
+app.delete("/tweets/:id", (req, res) => {
+  Tweet.findByIdAndDelete(req.params.id, (err, copyOfDeletedTweet) => {
+    res.send(copyOfDeletedTweet);
+  });
 });
 
 // tell app to listen
